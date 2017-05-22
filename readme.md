@@ -44,7 +44,10 @@ Then write some JSON to describe the goal counter:
 }
 ```
 
-`c2k` then transforms these files into the resulting app in the screenshot above.
+`c2k` compiles this JSON + function into an app I can load on my phone:
+
+![Screenshot](icon.png)
+
 
 # Getting Started
 
