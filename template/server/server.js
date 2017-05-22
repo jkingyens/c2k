@@ -51,7 +51,6 @@ app.get('/counter', auth, function (req, res) {
       },
       value: new_value
     }
-    console.log(result)
     res.json(result)
   })
   docker.run('sensor', ['node', 'server.js'], [result, process.stderr], {Tty:false}, function (err, data, container) {
