@@ -135,7 +135,7 @@ There are only two differences about deploying remotely vs. testing locally:
 1. `c2k` needs to bake the remote ip address of your server into the iOS app so it knows where to fetch
 2. You need to sign the app and install onto a real device instead of emulator
     * This will require a provisioning profile
-    * Check the box "Automatically Mangage Signing" to make things easier
+    * Check the box "Automatically Manage Signing" to make things easier
 
 Re-build the app by providing the `host` and `port` to `c2k` as CLI args:
 
@@ -153,7 +153,7 @@ Docker server should now be running here, just like in testing:
 
     root@remote:~/server# docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-    231066a1102e        server_c2k          "npm start"         59 seconds ago      Up 58 seconds       0.0.0.0:3005->3000/tcp   server_c2k_1
+    231066a1102e        server_c2k          "npm start"         59 seconds ago      Up 58 seconds       0.0.0.0:3000->3000/tcp   server_c2k_1
 
 Ensure your firewall is open on the port the service is bound to:
 
