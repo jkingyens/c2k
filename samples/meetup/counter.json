@@ -1,0 +1,9 @@
+{
+  "title": "Meetup RSVPs",
+  "max": 200,
+  "color": { 
+    "red": 0.7,
+    "green": 0.2,
+    "blue": 0.2
+  }
+}

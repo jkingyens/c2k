@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "dependencies": {
+    "basic-auth": "^1.1.0",
+    "concat-stream": "^1.6.0",
+    "dockerode": "2.4.2",
+    "express": "^4.14.1"
+  }
+}
