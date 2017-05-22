@@ -1,6 +1,13 @@
 # count2k (c2k)
 
-`c2k` is a tool that generates a "ring counter" mobile app from a simple javscript function. For instance, I can fetch the number of Meetups I've ever RSVP'ed for: 
+`c2k` is a tool that generates a custom goal tracking app from a simple javscript function. For instance, let's say I wanted an app that tracked the number of Meetup's I've RSVPed for in my lifetime, with a goal of hitting 200:
+
+<br>
+
+![Screenshot](samples/meetup/screen.png)
+
+
+First, I need a function to fetch my Meetup RSVP count: 
 
 ```javascript
 var request = require('request')
@@ -23,7 +30,7 @@ request({
 })
 ```
 
-Then write some JSON to describe the counter:
+Then write some JSON to describe the goal counter:
 
 ```javascript
 {
@@ -37,13 +44,11 @@ Then write some JSON to describe the counter:
 }
 ```
 
-The output is an app for your phone to track progress: <br><br> 
-
-![Screenshot](samples/meetup/screen.png)
+`c2k` then transforms these files into the resulting app in the screenshot above.
 
 # Getting Started
 
-To use this tool you must have a Mac with Xcode installed and setup for iOS development. You will be able to test counter fucntionality right in the emulator without hardware. You can also deploy to "production" by deploying the server component to a remove VM and installing the iOS app on a real device.
+To use this tool you must have a Mac with Xcode installed and setup for iOS development. You can test the tool locally with the iOS simulator. You can also deploy your counter as a server component to a remove VM and install the iOS app to your own device.
 
 ## Install the tool
 
@@ -62,11 +67,25 @@ There are two files you need to create, `counter.json` and `counter.js`
 
 ## counter.js 
 
-This is a node.js javscript file **that uses the request module only**
+This is basically a node.js program **that uses the request module only.** The general structure looks something like this:
+
+```javascript
+let request = require('request')
+...
+...
+request({ 
+
+}, function (err, resp, body) { 
+
+    ...
+    process.stdout('...')
+    
+}
+```
 
 The javascript function should simply print the value it's observering on `stdout` and quit.
 
-If the fetching errors, you should return non-zero exit from the process (see meetup example)
+If the fetching errors, you should return non-zero exit from the process (see meetup example above)
 
 ## counter.json 
 
