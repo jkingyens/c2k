@@ -68,7 +68,7 @@ A counter will live in a new empty directory:
 
 There are two files you need to create, `counter.json` and `counter.js`
 
-## counter.js 
+### counter.js 
 
 This is basically a node.js program **that uses the request module only.** The general structure looks something like this:
 
@@ -90,7 +90,7 @@ The javascript function should simply print the value it's observering on `stdou
 
 If the fetching errors, you should return non-zero exit from the process (see meetup example above)
 
-## counter.json 
+### counter.json 
 
 This describes the counter ring itself. You are required to specify all values:
 
