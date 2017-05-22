@@ -1,5 +1,5 @@
 let request = require('request')
-let apiKey = '606b2a1f247a6e457e2c1a31203e63'
+let apiKey = '606b2a1f247a6e457e2c1a31203e63' // REPLACE WITH YOUR KEY
 
 request({ 
     url: 'https://api.meetup.com/members/self',
