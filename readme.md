@@ -1,4 +1,4 @@
-# count2k (c2k)
+# c2k
 
 `c2k` is a tool that generates a custom goal tracking app from a simple javscript function. For instance, to create an app that tracks my lifetime Meetup RSVPs:
 
@@ -144,12 +144,13 @@ If everything looks good you can try deploying remotely:
 
 # Running on Device
 
-## server
-The big difference here is that you must run the build tool with public ip address and port where the server component will be listening:
+Re-run the build tool, but also supply the public ip address and port where server is listening:
 
     $ c2k 192.241.219.72 3000
 
-This tells the build tool to generate a deployment script that will bind the docker container to the right public port (in this case, 3000) and also tell the iOS component to connect with the server over this ip and port. Connection between the ios and server component is secured using basic http auth and a password/token generated at build time.
+The build tool will bake these into the iOS app it geneates so it knows how to find your server.
+
+## server
 
 To deploy remotely, transfer the `server` component to your remote machine:
 
@@ -187,7 +188,7 @@ Now, from your iOS device, run the "c2k" app from the home screen:
 
 To see the latest values, kill the app and restart it. Working on pull to fetch next ;) 
 
-# Happy Counting!
+# Happy Tracking!
 
 
 Copyright 2017 Jeff Kingyens
