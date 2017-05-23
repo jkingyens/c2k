@@ -58,8 +58,6 @@ To use this tool you must have a Mac with Xcode installed and setup for iOS deve
     $ git clone https://github.com/jkingyens/c2k.git && cd c2k
     $ npm install -g
 
-If you want to test your counter functionality locally I recommend installing [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description) and [docker-compose](https://github.com/docker/compose/releases). `c2k` will output a server component that deploys out-of-the-box with these tools.
-
 ## create a counter
 
 A counter will live in a new empty directory:
@@ -106,21 +104,32 @@ This describes the counter ring itself. You are required to specify all values:
 }
 ```
 
-# Local Testing
+# Testing with Simulator
 
-To test that your counter works locally, ensure you have Docker for Mac installed and `docker-compose` is usable at the commandline. Now do this from your counter path:
+To build the ring app for testing purposes, simply run `c2k` at the command line:
 
     $ c2k
-    $ cd output/server
+    
+Running this command will produce an `output` folder with a `server` and `ios` component:
+
+    $ cd output && ls -l
+    total 8
+    drwxr-xr-x   6 jkingyens  staff  204 May 21 17:07 ios
+    -rw-r--r--   1 jkingyens  staff  997 May 21 17:07 raw.json
+    drwxr-xr-x  11 jkingyens  staff  374 May 21 17:07 server
+
+To start the server locally, install [Docker for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description) and then run the shell command in `start.cmd`:
+
+    $ cd server
     $ sh start.cmd
 
-This will deploy the c2k server on `127.0.0.1` port `3000`, you can check it out:
+This will spin up the server using `docker-compose` on `127.0.0.1` port `3000`, you can check it out:
 
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
     96af1242c5f0        server_c2k          "npm start"         29 minutes ago      Up 29 minutes       0.0.0.0:3000->3000/tcp   server_c2k_1
 
-Now, load `output\ios\c2k.xcodeproj` in Xcode IDE: 
+Now, make sure you have Xcode development tools installed for Mac. Then, load `c2k.xcodeproj` from the `ios` component in Xcode IDE: 
 
     $ cd ../ios
     $ open c2k.xcodeproj
@@ -129,26 +138,27 @@ From the IDE build & run the project on a simulated device:
 
 ![Screenshot](build.png)
 
-Verify that your counter loads with the correct counter title, color, maximum count, as well as current value. If everything looks good you can try deploying remotely:
+Verify that your counter loads with the correct counter title, color, maximum count, as well as current value. It should look something like this: 
 
-# Remote Deploy
+![Screenshot](samples/meetup/screen.png)
 
-There are only two differences about deploying remotely vs. testing locally:
+If everything looks good you can try deploying remotely:
 
-1. `c2k` needs to bake the remote ip address of your server into the iOS app so it knows where to fetch
-2. You need to sign the app and install onto a real device instead of emulator
-    * This will require a provisioning profile
-    * Check the box "Automatically Manage Signing" to make things easier
+# Device Deployment
 
-Re-build the app by providing the `host` and `port` to `c2k` as CLI args:
+## server
+The big difference here is that you must run the build tool with the ip address and port that the server component will be accessible from on the internet, for example:
 
     $ c2k 192.241.219.72 3000
 
-This will generate a version of the server that binds to the port specificed here when starting from Docker on the remote machine. It will also generate a version of the iOS app that connects directly with the remote machine ip. Connection between them is negotationed with basic http auth.
+This tells the build tool to generate a deployment script that will bind the docker container to the right public port (in this case, 3000) and also tell the iOS component to connect with the server over this ip and port. Connection between the ios and server component is secured using basic http auth and a password/token generated at build time.
 
-To deploy remotely, copy everything in `server` to your remote machine:
+To deploy remotely, transfer the `server` component to your remote machine:
 
     $ scp -r ./output/server root@192.241.219.72:
+    
+Login to the remote machine, ensure docker is installed (with docker-compose) and run start.cmd: 
+
     $ ssh root@192.241.219.72
     root@remote$ cd server && sh start.cmd
 
@@ -158,12 +168,16 @@ Docker server should now be running here, just like in testing:
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
     231066a1102e        server_c2k          "npm start"         59 seconds ago      Up 58 seconds       0.0.0.0:3000->3000/tcp   server_c2k_1
 
-Ensure your firewall is open on the port the service is bound to:
+You may have a firewall on this machine since its exposed to the public, ensure the c2k port is open:
 
     root@remote:~/server# ufw allow 3000
     Rule added
     Rule added (v6)
     root@remote:~/server# 
+
+## ios app
+
+On the iOS side, it is just a matter of selecting your hardware device instead of the emulator in Xcode tools. The tools will complain about signing your app. Follow it's advice by selecting automatically managing key signing and then create/select your Apple developer profile. This will automatically generate the signing keys and enable you to deploy your app on a limited number of hardware devices. 
 
 Now, from your iOS device, run the "c2k" app from the home screen: 
 
