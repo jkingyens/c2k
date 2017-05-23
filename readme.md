@@ -1,13 +1,13 @@
 # count2k (c2k)
 
-`c2k` is a tool that generates a custom goal tracking app from a simple javscript function. For instance, let's say I wanted an app that tracked the number of Meetup's I've RSVPed for in my lifetime, with a goal of hitting 200:
+`c2k` is a tool that generates a custom goal tracking app from a simple javscript function. For instance, to create an app that tracks my lifetime Meetup RSVPs:
 
 <br>
 
 ![Screenshot](samples/meetup/screen.png)
 
 
-First, I need a function to fetch my Meetup RSVP count: 
+I write a javascript function to fetch my Meetup RSVP count: 
 
 ```javascript
 var request = require('request')
@@ -30,7 +30,7 @@ request({
 })
 ```
 
-Then write some JSON to describe the goal counter:
+and some JSON to describe the goal tracker:
 
 ```javascript
 {
@@ -44,14 +44,12 @@ Then write some JSON to describe the goal counter:
 }
 ```
 
-`c2k` compiles this JSON + function into an app I can load on my phone:
+`c2k` compiles this into a standalone iOS app:
 
 ![Screenshot](icon.png)
 
 
 # Getting Started
-
-To use this tool you must have a Mac with Xcode installed and setup for iOS development. You can test the tool locally with the iOS simulator. You can also deploy your counter as a server component to a remove VM and install the iOS app to your own device.
 
 ## Install the tool
 
@@ -123,13 +121,13 @@ To start the server locally, install [Docker for Mac](https://store.docker.com/e
     $ cd server
     $ sh start.cmd
 
-This will spin up the server using `docker-compose` on `127.0.0.1` port `3000`, you can check it out:
+This will spin up the server, which you can verify using docker CLI:
 
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
     96af1242c5f0        server_c2k          "npm start"         29 minutes ago      Up 29 minutes       0.0.0.0:3000->3000/tcp   server_c2k_1
 
-Now, make sure you have Xcode development tools installed for Mac. Then, load `c2k.xcodeproj` from the `ios` component in Xcode IDE: 
+Now, [install the Xcode tools](https://developer.apple.com/download/) and load up `c2k.xcodeproj` into the IDE: 
 
     $ cd ../ios
     $ open c2k.xcodeproj
@@ -144,10 +142,10 @@ Verify that your counter loads with the correct counter title, color, maximum co
 
 If everything looks good you can try deploying remotely:
 
-# Device Deployment
+# Running on Device
 
 ## server
-The big difference here is that you must run the build tool with the ip address and port that the server component will be accessible from on the internet, for example:
+The big difference here is that you must run the build tool with public ip address and port where the server component will be listening:
 
     $ c2k 192.241.219.72 3000
 
@@ -177,7 +175,11 @@ You may have a firewall on this machine since its exposed to the public, ensure 
 
 ## ios app
 
-On the iOS side, it is just a matter of selecting your hardware device instead of the emulator in Xcode tools. The tools will complain about signing your app. Follow it's advice by selecting automatically managing key signing and then create/select your Apple developer profile. This will automatically generate the signing keys and enable you to deploy your app on a limited number of hardware devices. 
+On the iOS side, it is just a matter of plugging in your iPhone and selecting this instead of the emulator:
+
+![Screenshot](build2.png)
+
+You will need to create a provisioning profile (or import one) to sign the executable for device deployment. 
 
 Now, from your iOS device, run the "c2k" app from the home screen: 
 
