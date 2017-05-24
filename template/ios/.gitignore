@@ -1,6 +1,7 @@
 ## Build generated
 build/
 DerivedData/
+c2k/Config.swift
 
 ## Various settings
 *.pbxuser

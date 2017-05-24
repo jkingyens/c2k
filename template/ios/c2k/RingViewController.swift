@@ -8,6 +8,29 @@
 
 
 import UIKit
+import Foundation
+import SystemConfiguration
+
+func isInternetAvailable() -> Bool
+{
+    var zeroAddress = sockaddr_in()
+    zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+    zeroAddress.sin_family = sa_family_t(AF_INET)
+    
+    let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+        $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+            SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+        }
+    }
+    
+    var flags = SCNetworkReachabilityFlags()
+    if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+        return false
+    }
+    let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+    let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+    return (isReachable && !needsConnection)
+}
 
 class RingViewController: UIViewController {
     
@@ -29,7 +52,38 @@ class RingViewController: UIViewController {
         refreshRing()
     }
     
+    func paintFromPreferences() {
+     
+        let defaults = UserDefaults.standard
+        
+        let value = defaults.object(forKey: "value")
+        let max = defaults.object(forKey: "max")
+        let title = defaults.object(forKey: "title")
+        let r = defaults.object(forKey: "red") as! Float
+        let g = defaults.object(forKey: "green") as! Float
+        let b = defaults.object(forKey: "blue") as! Float
+        
+        self.ringView?.isHidden = false
+        self.progressText?.text = String(describing: value as! NSNumber) + " / " + String(describing: (max as! NSNumber))
+        self.titleText?.text = (title as! String)
+        self.ringView?.progress = (value as! Double) / (max as! Double)
+        self.ringView?.tintColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
+        self.ringView?.setNeedsDisplay()
+        
+    }
+    
     func refreshRing() {
+        
+        if (!isInternetAvailable()) {
+            let defaults = UserDefaults.standard
+            if ((defaults.object(forKey: "timestamp")) != nil) {
+                paintFromPreferences()
+            } else {
+                self.errorBox?.text = "Connection\nError"
+                self.errorBox?.isHidden = false
+            }
+            return
+        }
         
         let loginString = String(format: "%@:%@", Config.username, Config.password)
         let loginData = loginString.data(using: String.Encoding.utf8)!
@@ -59,18 +113,22 @@ class RingViewController: UIViewController {
                         }
                         return
                     }
-                    
-                    self.ringView?.isHidden = false
+
                     let counter = try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
-                    self.progressText?.text = String(describing: counter["value"] as! NSNumber) + " / " + String(describing: (counter["max"] as! NSNumber))
-                    self.titleText?.text = (counter["title"] as! String)
-                    self.ringView?.progress = (counter["value"] as! Double) / (counter["max"] as! Double)
+
+                    let defaults = UserDefaults.standard
+                    defaults.set(counter["value"] as! NSNumber, forKey: "value")
+                    defaults.set(counter["max"] as! NSNumber, forKey: "max")
+                    defaults.set(counter["title"] as! String, forKey: "title")
                     let r = (counter["color"] as AnyObject)["r"] as! Float
                     let g = (counter["color"] as AnyObject)["g"] as! Float
                     let b = (counter["color"] as AnyObject)["b"] as! Float
-                    self.ringView?.tintColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
-                    self.ringView?.setNeedsDisplay()
-
+                    defaults.set(r, forKey: "red")
+                    defaults.set(g, forKey: "green")
+                    defaults.set(b, forKey: "blue")
+                    defaults.set(Date(), forKey: "timestamp")
+                    
+                    self.paintFromPreferences()
                 
                 } catch {
                     
