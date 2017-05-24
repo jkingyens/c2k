@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H5r-Ub-cbB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H5r-Ub-cbB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="height" constant="30" id="5e6-xl-VlW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.81546871939999999" green="0.83566144649999996" blue="0.8530752653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-5F-eNd" customClass="RingView" customModule="c2k">
@@ -38,7 +38,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vy-2a-765" userLabel="Progress">
                                         <rect key="frame" x="30" y="150" width="240" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.81546871939999999" green="0.83566144649999996" blue="0.8530752653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -76,6 +76,19 @@ Error</string>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Refresh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4P-rh-dAn">
+                                <rect key="frame" x="125" y="591" width="126" height="30"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0Dx-Qr-zwW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" red="0.81546871940653853" green="0.83566144654173513" blue="0.8530752652519894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="dg1-ub-NbM" appends="YES" id="xom-fT-gTb"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.00067664986459999997" blue="0.62613449929999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,6 +98,7 @@ Error</string>
                             <constraint firstItem="DbN-oi-l0d" firstAttribute="top" secondItem="QvK-xe-o2i" secondAttribute="bottom" constant="8" id="4bg-Pd-rnf"/>
                             <constraint firstItem="wqe-5F-eNd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DbN-oi-l0d" secondAttribute="bottom" constant="20" id="4vY-dC-Qtb"/>
                             <constraint firstItem="q1X-fA-I1R" firstAttribute="centerX" secondItem="4EK-S5-XuO" secondAttribute="centerX" id="Dl8-J5-8OJ"/>
+                            <constraint firstItem="7ce-Vo-cUF" firstAttribute="top" secondItem="V4P-rh-dAn" secondAttribute="bottom" constant="46" id="GBP-KJ-JcV"/>
                             <constraint firstItem="wqe-5F-eNd" firstAttribute="top" secondItem="q1X-fA-I1R" secondAttribute="bottom" constant="13" id="GME-jl-wo7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DbN-oi-l0d" secondAttribute="trailing" constant="20" id="HsP-r8-UKh"/>
                             <constraint firstItem="DbN-oi-l0d" firstAttribute="centerX" secondItem="4EK-S5-XuO" secondAttribute="centerX" id="Ies-Iu-d99"/>
@@ -95,6 +109,7 @@ Error</string>
                             <constraint firstItem="wqe-5F-eNd" firstAttribute="centerY" secondItem="4EK-S5-XuO" secondAttribute="centerY" id="Vju-8G-w7j"/>
                             <constraint firstItem="q1X-fA-I1R" firstAttribute="width" secondItem="4EK-S5-XuO" secondAttribute="width" id="gtA-7s-IGX"/>
                             <constraint firstItem="q1X-fA-I1R" firstAttribute="height" secondItem="QvK-xe-o2i" secondAttribute="height" id="lQE-0z-Y6Y"/>
+                            <constraint firstItem="V4P-rh-dAn" firstAttribute="centerX" secondItem="4EK-S5-XuO" secondAttribute="centerX" id="ne7-yG-BAC"/>
                             <constraint firstItem="wqe-5F-eNd" firstAttribute="centerX" secondItem="4EK-S5-XuO" secondAttribute="centerX" id="qAw-5r-5i6"/>
                             <constraint firstItem="q1X-fA-I1R" firstAttribute="top" secondItem="DbN-oi-l0d" secondAttribute="bottom" constant="8" id="sbF-Rp-QE2"/>
                         </constraints>
@@ -102,11 +117,17 @@ Error</string>
                     <connections>
                         <outlet property="errorBox" destination="JcC-HW-BCl" id="tm9-2G-Ztz"/>
                         <outlet property="progressText" destination="6Vy-2a-765" id="bIe-XX-iVR"/>
+                        <outlet property="refresh" destination="dg1-ub-NbM" id="X1h-hx-D9x"/>
                         <outlet property="ringView" destination="wqe-5F-eNd" id="s8R-IX-hLD"/>
                         <outlet property="titleText" destination="DbN-oi-l0d" id="Eiv-KI-84z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ne1-L1-6KN" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="dg1-ub-NbM">
+                    <connections>
+                        <action selector="refreshFromUIWithSender:" destination="H5r-Ub-cbB" id="ZPd-Z5-WCT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="317.60000000000002" y="977.36131934032994"/>
         </scene>

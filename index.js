@@ -5,11 +5,13 @@ let rimraf = require('rimraf')
 let uuid = require('node-uuid')
 let ncp = require('ncp')
 
-// commmand line options
+if (process.argv.length !== 2 && process.argv.length !== 4) { 
+  return console.error('c2k [<host> <port>]')
+}
+
 let ip = process.argv.length == 4 ? process.argv[2] : '127.0.0.1'
 let port = process.argv.length == 4 ? process.argv[3] : 3000 
 
-// remove output if already exists
 let cwd = process.cwd()
 let outputDir = cwd + '/output'
 let p = new Promise((resolve, reject) => {  
@@ -24,7 +26,6 @@ let p = new Promise((resolve, reject) => {
   });
 })
 
-// gather & validate template inputs
 p.then(() => {
   fs.readFile(cwd + '/counter.json', 'utf8', (err, data) => { 
     if (err || !data) { 
@@ -78,9 +79,9 @@ function render(inDir, outDir, inputs) {
       if (e) { 
         return console.error('error rendering template into output build directory')
       }
-      fs.writeFile(outDir + '/raw.json', JSON.stringify(inputs, null, 2), (err) => { 
+      fs.writeFile(outDir + '/build.json', JSON.stringify(inputs, null, 2), (err) => { 
         if (err) { 
-          return console.error('error writing raw.json to output directory')
+          return console.error('error writing build.json to output directory')
         }
         let serverDir = outDir + '/server'
         mkdirp(serverDir, (e) => { 

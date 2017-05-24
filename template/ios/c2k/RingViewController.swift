@@ -15,11 +15,17 @@ class RingViewController: UIViewController {
     @IBOutlet var progressText : UILabel?
     @IBOutlet var titleText : UILabel?
     @IBOutlet var errorBox : UILabel?
+    @IBOutlet var refresh : UITapGestureRecognizer?
     
     var userAct : NSUserActivity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshRing()
+        
+    }
+    
+    @IBAction func refreshFromUI(sender:UITapGestureRecognizer){
         refreshRing()
     }
     
