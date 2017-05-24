@@ -186,8 +186,6 @@ Now, from your iOS device, run the "c2k" app from the home screen:
 
 ![Screenshot](samples/meetup/screen.png)
 
-To see the latest values, kill the app and restart it. Working on pull to fetch next ;) 
-
 # Happy Tracking!
 
 
