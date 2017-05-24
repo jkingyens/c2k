@@ -11,8 +11,8 @@
 		C513C6BA1EC8DF6D00E09CD4 /* RingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C6B91EC8DF6D00E09CD4 /* RingViewController.swift */; };
 		C513C6BD1EC8DF6D00E09CD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C513C6BB1EC8DF6D00E09CD4 /* Main.storyboard */; };
 		C513C6BF1EC8DF6D00E09CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C513C6BE1EC8DF6D00E09CD4 /* Assets.xcassets */; };
+		C54994091ED55BE4007FDA64 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54994081ED55BE4007FDA64 /* Config.swift */; };
 		C58268F01EC973C700957FF0 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58268EF1EC973C700957FF0 /* RingView.swift */; };
-		C5FD63DF1ED239F200D5CA58 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FD63DE1ED239F200D5CA58 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +22,8 @@
 		C513C6BC1EC8DF6D00E09CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C513C6BE1EC8DF6D00E09CD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C513C6C31EC8DF6D00E09CD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C54994081ED55BE4007FDA64 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		C58268EF1EC973C700957FF0 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
-		C5FD63DE1ED239F200D5CA58 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +61,8 @@
 				C513C6BB1EC8DF6D00E09CD4 /* Main.storyboard */,
 				C513C6BE1EC8DF6D00E09CD4 /* Assets.xcassets */,
 				C513C6C31EC8DF6D00E09CD4 /* Info.plist */,
+				C54994081ED55BE4007FDA64 /* Config.swift */,
 				C58268EF1EC973C700957FF0 /* RingView.swift */,
-				C5FD63DE1ED239F200D5CA58 /* Config.swift */,
 			);
 			path = c2k;
 			sourceTree = "<group>";
@@ -138,7 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C58268F01EC973C700957FF0 /* RingView.swift in Sources */,
-				C5FD63DF1ED239F200D5CA58 /* Config.swift in Sources */,
+				C54994091ED55BE4007FDA64 /* Config.swift in Sources */,
 				C513C6BA1EC8DF6D00E09CD4 /* RingViewController.swift in Sources */,
 				C513C6B81EC8DF6D00E09CD4 /* AppDelegate.swift in Sources */,
 			);
