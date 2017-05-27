@@ -1,13 +1,13 @@
 # c2k
 
-`c2k` is a tool that generates a custom goal tracking app from a simple javscript function. For instance, to create an app that tracks my lifetime Meetup RSVPs:
+`c2k` is a tool that generates a custom goal tracking app from a simple JavScript function. For instance, to create an app that tracks my lifetime Meetup RSVPs:
 
 <br>
 
 ![Screenshot](samples/meetup/screen.png)
 
 
-I write a javascript function to fetch my Meetup RSVP count: 
+I write a JavaScript function to fetch my Meetup RSVP count: 
 
 ```javascript
 var request = require('request')
@@ -62,11 +62,11 @@ A counter will live in a new empty directory:
 
     $ mkdir mycounter && cd mycounter
 
-There are two files you need to create, `counter.json` and `counter.js`
+There are two files you need to create, `counter.json` and `counter.js`.
 
 ### counter.js 
 
-This is basically a node.js program **that uses the request module only.** The general structure looks something like this:
+This is basically a node.js program **that uses the request module only**. The general structure looks something like this:
 
 ```javascript
 let request = require('request')
@@ -82,9 +82,9 @@ request({
 }
 ```
 
-The javascript function should simply print the value it's observering on `stdout` and quit.
+The JavaScript function should simply print the value it's observering on `stdout` and quit.
 
-If the fetching errors, you should return non-zero exit from the process (see meetup example above)
+If there are fetching errors, you should return a non-zero exit code from the process (see the Meetup example above)
 
 ### counter.json 
 
@@ -121,7 +121,7 @@ To start the server locally, install [Docker for Mac](https://store.docker.com/e
     $ cd server
     $ sh start.cmd
 
-This will spin up the server, which you can verify using docker CLI:
+This will spin up the server, which you can verify using the docker CLI:
 
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
@@ -136,7 +136,7 @@ From the IDE build & run the project on a simulated device:
 
 ![Screenshot](build.png)
 
-Verify that your counter loads with the correct counter title, color, maximum count, as well as current value. It should look something like this: 
+Verify that your counter loads with the correct counter title, color, maximum count, as well as the current value. It should look something like this: 
 
 ![Screenshot](samples/meetup/screen.png)
 
@@ -144,11 +144,11 @@ If everything looks good you can try deploying remotely:
 
 # Running on Device
 
-Re-run the build tool, but also supply the public ip address and port where server is listening:
+Re-run the build tool, but also supply the public IP address and port where server is listening:
 
     $ c2k 192.241.219.72 3000
 
-The build tool will bake these into the iOS app it geneates so it knows how to find your server.
+The build tool will bake these into the iOS app it generates so it knows how to find your server.
 
 ## server
 
@@ -156,25 +156,25 @@ To deploy remotely, transfer the `server` component to your remote machine:
 
     $ scp -r ./output/server root@192.241.219.72:
     
-Login to the remote machine, ensure docker is installed (with docker-compose) and run start.cmd: 
+Login to the remote machine, ensure Docker is installed (with docker-compose) and run start.cmd: 
 
     $ ssh root@192.241.219.72
     root@remote$ cd server && sh start.cmd
 
-Docker server should now be running here, just like in testing:
+The Docker server should now be running here, just like in testing:
 
     root@remote:~/server# docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
     231066a1102e        server_c2k          "npm start"         59 seconds ago      Up 58 seconds       0.0.0.0:3000->3000/tcp   server_c2k_1
 
-You may have a firewall on this machine since its exposed to the public, ensure the c2k port is open:
+You may have a firewall on this machine since it's exposed to the public, so ensure the c2k port is open:
 
     root@remote:~/server# ufw allow 3000
     Rule added
     Rule added (v6)
     root@remote:~/server# 
 
-## ios app
+## iOS app
 
 On the iOS side, it is just a matter of plugging in your iPhone and selecting this instead of the emulator:
 
